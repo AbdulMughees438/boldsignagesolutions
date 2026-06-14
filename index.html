@@ -1,0 +1,1459 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bold Signage Solutions - Custom Signs & Signage Design</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-color: #1f2937;
+            --secondary-color: #dc2626;
+            --accent-color: #f59e0b;
+            --light-bg: #f9fafb;
+            --text-dark: #111827;
+            --text-light: #6b7280;
+            --border-color: #e5e7eb;
+            --success: #10b981;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            background-color: #ffffff;
+        }
+
+        /* Header & Navigation */
+        header {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--accent-color);
+            text-decoration: none;
+            letter-spacing: 1px;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2.5rem;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+            cursor: pointer;
+        }
+
+        .nav-links a:hover,
+        .nav-links a.active {
+            color: var(--accent-color);
+        }
+
+        .menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        /* Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, var(--primary-color) 0%, #374151 100%);
+            color: white;
+            padding: 8rem 2rem;
+            text-align: center;
+            display: none;
+        }
+
+        .hero.active {
+            display: block;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            font-weight: 800;
+            line-height: 1.2;
+        }
+
+        .hero .tagline {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+            color: #d1d5db;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .hero-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin: 3rem 0 2rem 0;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .stat-box {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 2rem;
+            border-radius: 10px;
+            backdrop-filter: blur(10px);
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--accent-color);
+            display: block;
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            color: #d1d5db;
+            margin-top: 0.5rem;
+        }
+
+        /* Buttons */
+        .btn {
+            display: inline-block;
+            padding: 0.875rem 2.5rem;
+            background-color: var(--secondary-color);
+            color: white;
+            text-decoration: none;
+            border-radius: 6px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: 2px solid var(--secondary-color);
+            cursor: pointer;
+            font-size: 1rem;
+        }
+
+        .btn:hover {
+            background-color: #b91c1c;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(220, 38, 38, 0.2);
+        }
+
+        .btn-secondary {
+            background-color: transparent;
+            color: white;
+            border-color: white;
+        }
+
+        .btn-secondary:hover {
+            background-color: white;
+            color: var(--primary-color);
+        }
+
+        .btn-outline {
+            background-color: transparent;
+            color: var(--secondary-color);
+            border-color: var(--secondary-color);
+        }
+
+        .btn-outline:hover {
+            background-color: var(--secondary-color);
+            color: white;
+        }
+
+        /* Sections */
+        section {
+            display: none;
+            padding: 4rem 2rem;
+        }
+
+        section.active {
+            display: block;
+        }
+
+        section.no-padding {
+            padding: 0;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: var(--text-dark);
+            text-align: center;
+        }
+
+        .section-subtitle {
+            font-size: 1.1rem;
+            color: var(--text-light);
+            text-align: center;
+            margin-bottom: 3rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Services Grid */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .service-card {
+            background: white;
+            border: 2px solid var(--border-color);
+            border-radius: 10px;
+            padding: 2rem;
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+
+        .service-card:hover {
+            border-color: var(--secondary-color);
+            box-shadow: 0 15px 35px rgba(220, 38, 38, 0.1);
+            transform: translateY(-10px);
+        }
+
+        .service-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .service-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--text-dark);
+        }
+
+        .service-card p {
+            color: var(--text-light);
+            margin-bottom: 1.5rem;
+        }
+
+        /* Portfolio */
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .portfolio-item {
+            background: var(--light-bg);
+            border-radius: 10px;
+            overflow: hidden;
+            transition: transform 0.3s ease;
+            cursor: pointer;
+        }
+
+        .portfolio-item:hover {
+            transform: scale(1.05);
+        }
+
+        .portfolio-image {
+            width: 100%;
+            height: 250px;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            color: white;
+        }
+
+        .portfolio-info {
+            padding: 1.5rem;
+        }
+
+        .portfolio-info h4 {
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+            color: var(--text-dark);
+        }
+
+        .portfolio-info p {
+            font-size: 0.9rem;
+            color: var(--text-light);
+        }
+
+        /* Testimonials */
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .testimonial-card {
+            background: var(--light-bg);
+            padding: 2rem;
+            border-radius: 10px;
+            border-left: 5px solid var(--secondary-color);
+        }
+
+        .testimonial-text {
+            color: var(--text-dark);
+            margin-bottom: 1.5rem;
+            font-style: italic;
+        }
+
+        .testimonial-author {
+            font-weight: 700;
+            color: var(--text-dark);
+            margin-bottom: 0.3rem;
+        }
+
+        .testimonial-role {
+            font-size: 0.9rem;
+            color: var(--text-light);
+        }
+
+        .stars {
+            color: var(--accent-color);
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
+        }
+
+        /* Features List */
+        .features-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .feature-item {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .feature-icon {
+            flex-shrink: 0;
+            width: 50px;
+            height: 50px;
+            background: var(--light-bg);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            color: var(--secondary-color);
+        }
+
+        .feature-content h4 {
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+            color: var(--text-dark);
+        }
+
+        .feature-content p {
+            color: var(--text-light);
+            font-size: 0.95rem;
+        }
+
+        /* Process Steps */
+        .process-steps {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .step-card {
+            text-align: center;
+            position: relative;
+        }
+
+        .step-number {
+            width: 80px;
+            height: 80px;
+            background: var(--secondary-color);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            font-weight: 700;
+            margin: 0 auto 1.5rem;
+        }
+
+        .step-card h4 {
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+            color: var(--text-dark);
+        }
+
+        .step-card p {
+            color: var(--text-light);
+        }
+
+        .step-connector {
+            display: none;
+            position: absolute;
+            top: 40px;
+            left: -50%;
+            width: 100%;
+            height: 2px;
+            background: var(--border-color);
+        }
+
+        /* Contact Form */
+        .contact-form {
+            max-width: 600px;
+            margin: 2rem auto;
+            background: var(--light-bg);
+            padding: 2rem;
+            border-radius: 10px;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: var(--text-dark);
+        }
+
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 0.875rem;
+            border: 2px solid var(--border-color);
+            border-radius: 6px;
+            font-family: inherit;
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: var(--secondary-color);
+            box-shadow: 0 0 0 3px rgba(220, 38, 38, 0.1);
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 150px;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 3rem 2rem 1rem;
+            margin-top: 4rem;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section h4 {
+            font-size: 1.1rem;
+            margin-bottom: 1rem;
+            color: var(--accent-color);
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section ul li {
+            margin-bottom: 0.7rem;
+        }
+
+        .footer-section ul li a {
+            color: #d1d5db;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-section ul li a:hover {
+            color: var(--accent-color);
+        }
+
+        .footer-section p {
+            color: #d1d5db;
+            font-size: 0.95rem;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .social-links a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            color: white;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .social-links a:hover {
+            background: var(--accent-color);
+        }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding-top: 2rem;
+            text-align: center;
+            color: #d1d5db;
+            font-size: 0.9rem;
+        }
+
+        /* About Section */
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+            margin-top: 3rem;
+        }
+
+        .about-text h3 {
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+            color: var(--text-dark);
+        }
+
+        .about-text p {
+            color: var(--text-light);
+            margin-bottom: 1.5rem;
+            line-height: 1.8;
+        }
+
+        .about-image {
+            width: 100%;
+            height: 400px;
+            background: linear-gradient(135deg, var(--secondary-color), var(--accent-color));
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 5rem;
+            color: white;
+        }
+
+        /* CTA Section */
+        .cta-section {
+            background: linear-gradient(135deg, var(--secondary-color) 0%, #b91c1c 100%);
+            color: white;
+            padding: 4rem 2rem;
+            text-align: center;
+            border-radius: 10px;
+            margin-top: 4rem;
+        }
+
+        .cta-section h2 {
+            font-size: 2.2rem;
+            margin-bottom: 1rem;
+        }
+
+        .cta-section p {
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+            color: #fee2e2;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-links {
+                gap: 1rem;
+                font-size: 0.9rem;
+            }
+
+            .menu-toggle {
+                display: block;
+            }
+
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .hero-stats {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .section-title {
+                font-size: 1.8rem;
+            }
+
+            .services-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .portfolio-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .about-content {
+                grid-template-columns: 1fr;
+            }
+
+            .about-image {
+                height: 300px;
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr;
+            }
+
+            .process-steps {
+                grid-template-columns: 1fr;
+            }
+
+            nav {
+                padding: 0 1rem;
+            }
+
+            .logo {
+                font-size: 1.3rem;
+            }
+        }
+
+        /* Utility Classes */
+        .text-center {
+            text-align: center;
+        }
+
+        .mt-3 {
+            margin-top: 3rem;
+        }
+
+        .mb-2 {
+            margin-bottom: 2rem;
+        }
+
+        .hidden {
+            display: none !important;
+        }
+
+        /* Loading Animation */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        section.active {
+            animation: fadeIn 0.5s ease-out;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header & Navigation -->
+    <header>
+        <nav>
+            <a href="#" class="logo">BOLD SIGNAGE</a>
+            <ul class="nav-links">
+                <li><a onclick="showPage('home')" class="active">Home</a></li>
+                <li><a onclick="showPage('services')">Services</a></li>
+                <li><a onclick="showPage('portfolio')">Portfolio</a></li>
+                <li><a onclick="showPage('about')">About</a></li>
+                <li><a onclick="showPage('process')">Process</a></li>
+                <li><a onclick="showPage('contact')">Contact</a></li>
+            </ul>
+            <button class="menu-toggle">☰</button>
+        </nav>
+    </header>
+
+    <!-- HOME PAGE -->
+    <section id="home" class="active">
+        <div class="hero active">
+            <h1>Transform Your Brand With Custom Signage That Commands Attention</h1>
+            <p class="tagline">From stunning channel letters and vehicle wraps to eye-catching lightboxes and digital displays — every sign is custom-crafted for your brand. Buy at <a href="https://boldsignagesolutions.com/">Bold signage Solutions</a></a></p>
+            
+            <div class="hero-stats">
+                <div class="stat-box">
+                    <span class="stat-number">9,751+</span>
+                    <span class="stat-label">Signs Created</span>
+                </div>
+                <div class="stat-box">
+                    <span class="stat-number">8,700+</span>
+                    <span class="stat-label">Happy Customers</span>
+                </div>
+                <div class="stat-box">
+                    <span class="stat-number">5</span>
+                    <span class="stat-label">Star Ratings</span>
+                </div>
+            </div>
+
+            <div>
+                <button class="btn" onclick="showPage('contact')">Get Free Quote</button>
+                <button class="btn btn-secondary" onclick="showPage('services')">Explore Services</button>
+            </div>
+        </div>
+
+        <div class="container">
+            <section style="padding: 4rem 0;">
+                <h2 class="section-title">Why Choose Bold Signage Solutions?</h2>
+                <p class="section-subtitle">Quality, Creativity, and Reliability</p>
+                
+                <div class="features-list">
+                    <div class="feature-item">
+                        <div class="feature-icon">✓</div>
+                        <div class="feature-content">
+                            <h4>Expert Design Team</h4>
+                            <p>Professional designers craft unique, eye-catching designs tailored to your brand.</p>
+                        </div>
+                    </div>
+                    <div class="feature-item">
+                        <div class="feature-icon">✓</div>
+                        <div class="feature-content">
+                            <h4>Premium Fabrication</h4>
+                            <p>State-of-the-art manufacturing ensures superior quality and durability.</p>
+                        </div>
+                    </div>
+                    <div class="feature-item">
+                        <div class="feature-icon">✓</div>
+                        <div class="feature-content">
+                            <h4>Professional Installation</h4>
+                            <p>Expert technicians handle installation across all 50 states with precision.</p>
+                        </div>
+                    </div>
+                    <div class="feature-item">
+                        <div class="feature-icon">✓</div>
+                        <div class="feature-content">
+                            <h4>Full-Service Support</h4>
+                            <p>From concept to completion, we're with you every step of the way.</p>
+                        </div>
+                    </div>
+                    <div class="feature-item">
+                        <div class="feature-icon">✓</div>
+                        <div class="feature-content">
+                            <h4>Fast Delivery</h4>
+                            <p>Quick turnaround times without compromising on quality or craftsmanship.</p>
+                        </div>
+                    </div>
+                    <div class="feature-item">
+                        <div class="feature-icon">✓</div>
+                        <div class="feature-content">
+                            <h4>Affordable Pricing</h4>
+                            <p>Premium signage solutions at competitive prices that fit your budget.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Featured Services -->
+            <section style="padding: 4rem 0;">
+                <h2 class="section-title">Our Signature Services</h2>
+                <p class="section-subtitle">Premium signage solutions designed to make your business unforgettable</p>
+                
+                <div class="services-grid">
+                    <div class="service-card">
+                        <div class="service-icon">🔤</div>
+                        <h3>Channel Letters</h3>
+                        <p>LED backlit and halo-lit channel letters for stunning 24/7 visibility and premium brand presence.</p>
+                        <button class="btn btn-outline" onclick="showPage('services')">Learn More</button>
+                    </div>
+                    <div class="service-card">
+                        <div class="service-icon">🎨</div>
+                        <h3>Dimensional Letters</h3>
+                        <p>3D acrylic and metal letters with premium finishes that command attention from every angle.</p>
+                        <button class="btn btn-outline" onclick="showPage('services')">Learn More</button>
+                    </div>
+                    <div class="service-card">
+                        <div class="service-icon">🚗</div>
+                        <h3>Vehicle Wraps</h3>
+                        <p>Full or partial wraps that turn your fleet into mobile advertisements generating constant exposure.</p>
+                        <button class="btn btn-outline" onclick="showPage('services')">Learn More</button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Testimonials -->
+            <section style="padding: 4rem 0;">
+                <h2 class="section-title">What Our Customers Say</h2>
+                <p class="section-subtitle">Join thousands of satisfied businesses</p>
+                
+                <div class="testimonials-grid">
+                    <div class="testimonial-card">
+                        <div class="stars">★★★★★</div>
+                        <p class="testimonial-text">"Bold Signage Solutions completely transformed our storefront. The quality is exceptional and the installation was seamless. Highly recommend!"</p>
+                        <p class="testimonial-author">Sarah Johnson</p>
+                        <p class="testimonial-role">Restaurant Owner</p>
+                    </div>
+                    <div class="testimonial-card">
+                        <div class="stars">★★★★★</div>
+                        <p class="testimonial-text">"Our vehicle wraps look incredible! The design team understood our vision perfectly and the execution was flawless."</p>
+                        <p class="testimonial-author">Michael Chen</p>
+                        <p class="testimonial-role">Marketing Director</p>
+                    </div>
+                    <div class="testimonial-card">
+                        <div class="stars">★★★★★</div>
+                        <p class="testimonial-text">"Fast delivery, amazing quality, and professional team. We're already planning our next project with them!"</p>
+                        <p class="testimonial-author">Emma Williams</p>
+                        <p class="testimonial-role">Retail Store Manager</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- CTA -->
+            <div class="cta-section">
+                <h2>Ready to Make Your Brand Shine?</h2>
+                <p>Get a free quote and let our expert team bring your signage vision to life.</p>
+                <button class="btn btn-secondary" onclick="showPage('contact')">Request Free Quote</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- SERVICES PAGE -->
+    <section id="services">
+        <div class="container">
+            <h2 class="section-title">Our Complete Signage Solutions</h2>
+            <p class="section-subtitle">Premium custom signs for every business need</p>
+
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-icon">💡</div>
+                    <h3>Channel Letters</h3>
+                    <p>LED Backlit & Halo-Lit letters for 24/7 visibility</p>
+                    <p style="font-size: 0.9rem; color: var(--text-light);">Perfect for storefronts and businesses requiring constant visibility. Our custom channel letters feature premium LED lighting for stunning nighttime presence.</p>
+                </div>
+
+                <div class="service-card">
+                    <div class="service-icon">🎯</div>
+                    <h3>3D Dimensional Letters</h3>
+                    <p>Custom acrylic and metal dimensional signage</p>
+                    <p style="font-size: 0.9rem; color: var(--text-light);">Premium 3D letters with custom finishes that create dramatic visual impact and establish brand authority from the moment customers arrive.</p>
+                </div>
+
+                <div class="service-card">
+                    <div class="service-icon">🚗</div>
+                    <h3>Vehicle Wraps</h3>
+                    <p>Full & partial fleet wraps for mobile advertising</p>
+                    <p style="font-size: 0.9rem; color: var(--text-light);">Transform your vehicles into moving billboards. Custom designs that protect your paint while building brand awareness everywhere you go.</p>
+                </div>
+
+                <div class="service-card">
+                    <div class="service-icon">🎨</div>
+                    <h3>Window Graphics</h3>
+                    <p>Custom printed films and frosted designs</p>
+                    <p style="font-size: 0.9rem; color: var(--text-light);">Eye-catching window displays with custom printed films, perforations, and frosted privacy graphics that enhance aesthetics and function.</p>
+                </div>
+
+                <div class="service-card">
+                    <div class="service-icon">🎪</div>
+                    <h3>Vinyl Banners</h3>
+                    <p>Heavy-duty indoor and outdoor banners</p>
+                    <p style="font-size: 0.9rem; color: var(--text-light);">Durable vinyl banners perfect for events, promotions, and seasonal displays. Custom designs printed with vibrant colors.</p>
+                </div>
+
+                <div class="service-card">
+                    <div class="service-icon">📱</div>
+                    <h3>Lightbox Signs</h3>
+                    <p>Illuminated display solutions for maximum impact</p>
+                    <p style="font-size: 0.9rem; color: var(--text-light);">Eye-catching illuminated lightbox signs perfect for storefronts, menus, and indoor displays that demand attention.</p>
+                </div>
+
+                <div class="service-card">
+                    <div class="service-icon">💎</div>
+                    <h3>Acrylic Signs</h3>
+                    <p>Premium clarity and custom colors</p>
+                    <p style="font-size: 0.9rem; color: var(--text-light);">Crystal clear acrylic signage in virtually any color with unlimited customization options for sophisticated brand presentation.</p>
+                </div>
+
+                <div class="service-card">
+                    <div class="service-icon">⚡</div>
+                    <h3>Neon Signs</h3>
+                    <p>Vintage and modern neon designs</p>
+                    <p style="font-size: 0.9rem; color: var(--text-light);">Classic neon signs perfect for bars, restaurants, and retail spaces seeking distinctive vintage or contemporary aesthetics.</p>
+                </div>
+
+                <div class="service-card">
+                    <div class="service-icon">🏆</div>
+                    <h3>Metal Signs</h3>
+                    <p>Custom fabricated metal signage</p>
+                    <p style="font-size: 0.9rem; color: var(--text-light);">Durable metal signs with professional finishes. Perfect for industrial applications and businesses seeking premium appearance.</p>
+                </div>
+            </div>
+
+            <!-- Service Benefits -->
+            <section style="padding: 4rem 0; border-top: 2px solid var(--border-color); margin-top: 3rem;">
+                <h2 class="section-title">Why Bold Signage Solutions?</h2>
+                
+                <div class="features-list">
+                    <div class="feature-item">
+                        <div class="feature-icon">✓</div>
+                        <div class="feature-content">
+                            <h4>Custom Design</h4>
+                            <p>Every sign is uniquely designed for your brand and business needs.</p>
+                        </div>
+                    </div>
+                    <div class="feature-item">
+                        <div class="feature-icon">✓</div>
+                        <div class="feature-content">
+                            <h4>Quality Materials</h4>
+                            <p>Premium materials ensure longevity, durability, and visual excellence.</p>
+                        </div>
+                    </div>
+                    <div class="feature-item">
+                        <div class="feature-icon">✓</div>
+                        <div class="feature-content">
+                            <h4>Expert Craftsmanship</h4>
+                            <p>Skilled fabricators deliver exceptional quality on every project.</p>
+                        </div>
+                    </div>
+                    <div class="feature-item">
+                        <div class="feature-icon">✓</div>
+                        <div class="feature-content">
+                            <h4>Professional Installation</h4>
+                            <p>Expert technicians ensure perfect installation across all 50 states.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <div class="cta-section">
+                <h2>Ready to Get Started?</h2>
+                <p>Contact us for a free consultation and quote on your signage project.</p>
+                <button class="btn btn-secondary" onclick="showPage('contact')">Get Free Quote</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- PORTFOLIO PAGE -->
+    <section id="portfolio">
+        <div class="container">
+            <h2 class="section-title">Our Portfolio</h2>
+            <p class="section-subtitle">Showcase of completed signage projects across the nation</p>
+
+            <div class="portfolio-grid">
+                <div class="portfolio-item">
+                    <div class="portfolio-image">🔤</div>
+                    <div class="portfolio-info">
+                        <h4>Channel Letter Installation</h4>
+                        <p>Premium LED backlit channel letters for downtown retail storefront</p>
+                    </div>
+                </div>
+
+                <div class="portfolio-item">
+                    <div class="portfolio-image">🚗</div>
+                    <div class="portfolio-info">
+                        <h4>Full Vehicle Wrap</h4>
+                        <p>Complete fleet wrap design and installation for delivery service</p>
+                    </div>
+                </div>
+
+                <div class="portfolio-item">
+                    <div class="portfolio-image">🎨</div>
+                    <div class="portfolio-info">
+                        <h4>Dimensional Acrylic Signs</h4>
+                        <p>3D acrylic letters with custom mounting for luxury retail brand</p>
+                    </div>
+                </div>
+
+                <div class="portfolio-item">
+                    <div class="portfolio-image">💡</div>
+                    <div class="portfolio-info">
+                        <h4>Lightbox Display</h4>
+                        <p>Illuminated lightbox signage for restaurant entrance</p>
+                    </div>
+                </div>
+
+                <div class="portfolio-item">
+                    <div class="portfolio-image">🏢</div>
+                    <div class="portfolio-info">
+                        <h4>Corporate Signage</h4>
+                        <p>Large-scale corporate building sign installation</p>
+                    </div>
+                </div>
+
+                <div class="portfolio-item">
+                    <div class="portfolio-image">🎪</div>
+                    <div class="portfolio-info">
+                        <h4>Event Banner Installation</h4>
+                        <p>Custom vinyl banners for major promotional event</p>
+                    </div>
+                </div>
+
+                <div class="portfolio-item">
+                    <div class="portfolio-image">🪟</div>
+                    <div class="portfolio-info">
+                        <h4>Window Graphics</h4>
+                        <p>Frosted window films for office privacy and branding</p>
+                    </div>
+                </div>
+
+                <div class="portfolio-item">
+                    <div class="portfolio-image">⚡</div>
+                    <div class="portfolio-info">
+                        <h4>Neon Sign Restoration</h4>
+                        <p>Classic neon sign recreation for vintage retail aesthetic</p>
+                    </div>
+                </div>
+
+                <div class="portfolio-item">
+                    <div class="portfolio-image">🏆</div>
+                    <div class="portfolio-info">
+                        <h4>Metal Signage</h4>
+                        <p>Custom brushed aluminum signage for professional services</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="cta-section" style="margin-top: 4rem;">
+                <h2>Ready to Create Something Amazing?</h2>
+                <p>Let's discuss your signage vision and bring it to life.</p>
+                <button class="btn btn-secondary" onclick="showPage('contact')">Start Your Project</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- ABOUT PAGE -->
+    <section id="about">
+        <div class="container">
+            <h2 class="section-title">About Bold Signage Solutions</h2>
+            <p class="section-subtitle">Your trusted partner in custom signage since 2015</p>
+
+            <div class="about-content">
+                <div class="about-text">
+                    <h3>Who We Are</h3>
+                    <p>Bold Signage Solutions is a family-owned American signage company with over 5+ years of combined experience in design, fabrication, and installation. We're passionate about creating exceptional signs that transform businesses and capture customer attention.</p>
+                    <p>From concept to completion, we're committed to delivering premium quality signage solutions that exceed expectations and drive real business results.</p>
+                    <h3 style="margin-top: 2rem;">Our Mission</h3>
+                    <p>To empower businesses across America with stunning, custom signage that elevates brand presence, attracts customers, and creates lasting impressions that drive growth.</p>
+                </div>
+                <div class="about-image">🎯</div>
+            </div>
+
+            <!-- Team Stats -->
+            <section style="padding: 4rem 0; border-top: 2px solid var(--border-color); margin-top: 3rem;">
+                <h2 class="section-title">By The Numbers</h2>
+                
+                <div class="hero-stats">
+                    <div class="stat-box" style="background: var(--light-bg); color: var(--text-dark); border: 2px solid var(--border-color);">
+                        <span class="stat-number" style="color: var(--secondary-color);">9,751+</span>
+                        <span class="stat-label" style="color: var(--text-light);">Signs Manufactured</span>
+                    </div>
+                    <div class="stat-box" style="background: var(--light-bg); color: var(--text-dark); border: 2px solid var(--border-color);">
+                        <span class="stat-number" style="color: var(--secondary-color);">8,700+</span>
+                        <span class="stat-label" style="color: var(--text-light);">Satisfied Customers</span>
+                    </div>
+                    <div class="stat-box" style="background: var(--light-bg); color: var(--text-dark); border: 2px solid var(--border-color);">
+                        <span class="stat-number" style="color: var(--secondary-color);">50</span>
+                        <span class="stat-label" style="color: var(--text-light);">States Served</span>
+                    </div>
+                    <div class="stat-box" style="background: var(--light-bg); color: var(--text-dark); border: 2px solid var(--border-color);">
+                        <span class="stat-number" style="color: var(--secondary-color);">5</span>
+                        <span class="stat-label" style="color: var(--text-light);">Star Rating</span>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Core Values -->
+            <section style="padding: 4rem 0;">
+                <h2 class="section-title">Our Core Values</h2>
+                
+                <div class="features-list">
+                    <div class="feature-item">
+                        <div class="feature-icon">🎨</div>
+                        <div class="feature-content">
+                            <h4>Quality</h4>
+                            <p>Premium materials and expert craftsmanship in every project we undertake.</p>
+                        </div>
+                    </div>
+                    <div class="feature-item">
+                        <div class="feature-icon">💡</div>
+                        <div class="feature-content">
+                            <h4>Creativity</h4>
+                            <p>Innovative designs that push boundaries and capture imagination.</p>
+                        </div>
+                    </div>
+                    <div class="feature-item">
+                        <div class="feature-icon">🤝</div>
+                        <div class="feature-content">
+                            <h4>Reliability</h4>
+                            <p>Dependable service and professional support from start to finish.</p>
+                        </div>
+                    </div>
+                    <div class="feature-item">
+                        <div class="feature-icon">✨</div>
+                        <div class="feature-content">
+                            <h4>Excellence</h4>
+                            <p>Commitment to exceeding expectations on every single project.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <div class="cta-section">
+                <h2>Partner With The Best</h2>
+                <p>Join thousands of businesses that trust Bold Signage Solutions.</p>
+                <button class="btn btn-secondary" onclick="showPage('contact')">Get In Touch</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- PROCESS PAGE -->
+    <section id="process">
+        <div class="container">
+            <h2 class="section-title">Our Process</h2>
+            <p class="section-subtitle">From concept to installation — we guide you every step of the way</p>
+
+            <div class="process-steps">
+                <div class="step-card">
+                    <div class="step-number">1</div>
+                    <h4>Consultation</h4>
+                    <p>We meet with you to understand your vision, brand, and specific needs. This free consultation allows us to assess requirements and discuss possibilities.</p>
+                </div>
+
+                <div class="step-card">
+                    <div class="step-number">2</div>
+                    <h4>Design</h4>
+                    <p>Our expert design team creates custom concepts tailored to your brand. We provide detailed mockups and renderings for your approval.</p>
+                </div>
+
+                <div class="step-card">
+                    <div class="step-number">3</div>
+                    <h4>Quotation</h4>
+                    <p>Receive transparent pricing with detailed breakdown of materials, fabrication, and installation. We work within your budget.</p>
+                </div>
+
+                <div class="step-card">
+                    <div class="step-number">4</div>
+                    <h4>Fabrication</h4>
+                    <p>Our skilled technicians manufacture your sign using premium materials and state-of-the-art equipment, ensuring superior quality.</p>
+                </div>
+
+                <div class="step-card">
+                    <div class="step-number">5</div>
+                    <h4>Quality Check</h4>
+                    <p>Every sign undergoes rigorous quality inspection before shipping to ensure it meets our exacting standards.</p>
+                </div>
+
+                <div class="step-card">
+                    <div class="step-number">6</div>
+                    <h4>Installation</h4>
+                    <p>Professional installation team handles on-site setup with precision and care, ensuring perfect presentation and structural integrity.</p>
+                </div>
+            </div>
+
+            <!-- Why Our Process Works -->
+            <section style="padding: 4rem 0; border-top: 2px solid var(--border-color); margin-top: 3rem;">
+                <h2 class="section-title">Why Our Process Works</h2>
+                
+                <div class="features-list">
+                    <div class="feature-item">
+                        <div class="feature-icon">🎯</div>
+                        <div class="feature-content">
+                            <h4>Collaboration</h4>
+                            <p>Your input matters at every stage. We work closely with you to ensure the final result exceeds expectations.</p>
+                        </div>
+                    </div>
+                    <div class="feature-item">
+                        <div class="feature-icon">⚙️</div>
+                        <div class="feature-content">
+                            <h4>Efficiency</h4>
+                            <p>Streamlined processes mean faster turnaround without compromising quality or attention to detail.</p>
+                        </div>
+                    </div>
+                    <div class="feature-item">
+                        <div class="feature-icon">✅</div>
+                        <div class="feature-content">
+                            <h4>Transparency</h4>
+                            <p>Clear communication throughout the project with regular updates and no hidden surprises.</p>
+                        </div>
+                    </div>
+                    <div class="feature-item">
+                        <div class="feature-icon">🏆</div>
+                        <div class="feature-content">
+                            <h4>Quality Assurance</h4>
+                            <p>Multiple quality checkpoints ensure your sign is perfect before it leaves our facility.</p>
+                        </div>
+                    </div>
+                    <div class="feature-item">
+                        <div class="feature-icon">🚀</div>
+                        <div class="feature-content">
+                            <h4>Fast Delivery</h4>
+                            <p>Competitive timelines mean your new signage is installed quickly, getting your investment to work sooner.</p>
+                        </div>
+                    </div>
+                    <div class="feature-item">
+                        <div class="feature-icon">🤝</div>
+                        <div class="feature-content">
+                            <h4>Support</h4>
+                            <p>We're here for you after installation with maintenance tips and ongoing support.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <div class="cta-section">
+                <h2>Ready to Start Your Project?</h2>
+                <p>Schedule your free consultation today and let's create something amazing together.</p>
+                <button class="btn btn-secondary" onclick="showPage('contact')">Schedule Consultation</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- CONTACT PAGE -->
+    <section id="contact">
+        <div class="container">
+            <h2 class="section-title">Contact Us</h2>
+            <p class="section-subtitle">Get in touch for a free quote and consultation</p>
+
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; margin-top: 3rem; align-items: start;">
+                <div>
+                    <h3 style="font-size: 1.5rem; margin-bottom: 1.5rem; color: var(--text-dark);">Contact Information</h3>
+                    
+                    <div style="margin-bottom: 2rem;">
+                        <h4 style="color: var(--text-dark); margin-bottom: 0.5rem;">Phone</h4>
+                        <p style="color: var(--text-light); font-size: 1.1rem;">1-800-SIGNAGE</p>
+                    </div>
+
+                    <div style="margin-bottom: 2rem;">
+                        <h4 style="color: var(--text-dark); margin-bottom: 0.5rem;">Email</h4>
+                        <p style="color: var(--text-light); font-size: 1.1rem;">info@boldsignagesolutions.com</p>
+                    </div>
+
+                    <div style="margin-bottom: 2rem;">
+                        <h4 style="color: var(--text-dark); margin-bottom: 0.5rem;">Address</h4>
+                        <p style="color: var(--text-light);">Bold Signage Solutions<br>Serving All 50 States<br>Nationwide Installation Available</p>
+                    </div>
+
+                    <div style="margin-bottom: 2rem;">
+                        <h4 style="color: var(--text-dark); margin-bottom: 1rem;">Follow Us</h4>
+                        <div class="social-links">
+                            <a href="#">f</a>
+                            <a href="#">in</a>
+                            <a href="#">@</a>
+                            <a href="#">▶</a>
+                        </div>
+                    </div>
+
+                    <h3 style="font-size: 1.3rem; margin-top: 2rem; margin-bottom: 1rem; color: var(--text-dark);">Why Contact Us?</h3>
+                    <ul style="list-style: none; color: var(--text-light);">
+                        <li style="margin-bottom: 0.8rem;">✓ Free consultation and quote</li>
+                        <li style="margin-bottom: 0.8rem;">✓ Expert design guidance</li>
+                        <li style="margin-bottom: 0.8rem;">✓ 50-state installation network</li>
+                        <li style="margin-bottom: 0.8rem;">✓ Fast turnaround times</li>
+                        <li style="margin-bottom: 0.8rem;">✓ Premium quality guarantee</li>
+                    </ul>
+                </div>
+
+                <div class="contact-form">
+                    <form onsubmit="handleSubmit(event)">
+                        <div class="form-group">
+                            <label>Your Name *</label>
+                            <input type="text" placeholder="John Doe" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Business Name *</label>
+                            <input type="text" placeholder="Your Business" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Email Address *</label>
+                            <input type="email" placeholder="you@example.com" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Phone Number *</label>
+                            <input type="tel" placeholder="(555) 123-4567" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Service Type *</label>
+                            <select required>
+                                <option value="">Select a service...</option>
+                                <option value="channel-letters">Channel Letters</option>
+                                <option value="dimensional">Dimensional Letters</option>
+                                <option value="vehicle-wraps">Vehicle Wraps</option>
+                                <option value="window-graphics">Window Graphics</option>
+                                <option value="vinyl-banners">Vinyl Banners</option>
+                                <option value="lightbox">Lightbox Signs</option>
+                                <option value="acrylic">Acrylic Signs</option>
+                                <option value="neon">Neon Signs</option>
+                                <option value="metal">Metal Signs</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Project Details *</label>
+                            <textarea placeholder="Tell us about your project..." required></textarea>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Budget Range</label>
+                            <select>
+                                <option value="">Select a range...</option>
+                                <option value="under-1k">Under $1,000</option>
+                                <option value="1k-5k">$1,000 - $5,000</option>
+                                <option value="5k-10k">$5,000 - $10,000</option>
+                                <option value="10k-plus">$10,000+</option>
+                            </select>
+                        </div>
+
+                        <button type="submit" class="btn" style="width: 100%;">Send Inquiry</button>
+                        <p style="text-align: center; color: var(--text-light); font-size: 0.85rem; margin-top: 1rem;">We'll respond within 24 hours</p>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4>Bold Signage Solutions</h4>
+                <p>Premium custom signage design, fabrication, and installation across all 50 states. Your brand deserves to stand out.</p>
+                <div class="social-links">
+                    <a href="#">f</a>
+                    <a href="#">in</a>
+                    <a href="#">@</a>
+                    <a href="#">▶</a>
+                </div>
+            </div>
+
+            <div class="footer-section">
+                <h4>Services</h4>
+                <ul>
+                    <li><a href="#" onclick="showPage('services')">Channel Letters</a></li>
+                    <li><a href="#" onclick="showPage('services')">Dimensional Letters</a></li>
+                    <li><a href="#" onclick="showPage('services')">Vehicle Wraps</a></li>
+                    <li><a href="#" onclick="showPage('services')">Window Graphics</a></li>
+                    <li><a href="#" onclick="showPage('services')">Lightbox Signs</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-section">
+                <h4>Company</h4>
+                <ul>
+                    <li><a href="#" onclick="showPage('home')">Home</a></li>
+                    <li><a href="#" onclick="showPage('about')">About Us</a></li>
+                    <li><a href="#" onclick="showPage('process')">Our Process</a></li>
+                    <li><a href="#" onclick="showPage('portfolio')">Portfolio</a></li>
+                    <li><a href="#" onclick="showPage('contact')">Contact</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-section">
+                <h4>Contact</h4>
+                <p><strong>Phone:</strong> 1-800-SIGNAGE</p>
+                <p><strong>Email:</strong> info@boldsignagesolutions.com</p>
+                <p><strong>Service Area:</strong> All 50 States</p>
+                <p><strong>Hours:</strong> Mon-Fri 9AM-6PM EST</p>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p>&copy; 2026 Bold Signage Solutions. All rights reserved. | <a href="#" style="color: inherit; text-decoration: underline;">Privacy Policy</a> | <a href="#" style="color: inherit; text-decoration: underline;">Terms of Service</a></p>
+        </div>
+    </footer>
+
+    <script>
+        // Page Navigation
+        function showPage(pageId) {
+            // Hide all sections
+            const sections = document.querySelectorAll('section');
+            sections.forEach(section => section.classList.remove('active'));
+
+            // Show selected section
+            const page = document.getElementById(pageId);
+            if (page) {
+                page.classList.add('active');
+            }
+
+            // Update nav links
+            const navLinks = document.querySelectorAll('.nav-links a');
+            navLinks.forEach(link => link.classList.remove('active'));
+            event.target.classList.add('active');
+
+            // Scroll to top
+            window.scrollTo(0, 0);
+        }
+
+        // Form Submission
+        function handleSubmit(event) {
+            event.preventDefault();
+            
+            const form = event.target;
+            const formData = new FormData(form);
+            
+            // Show success message
+            alert('Thank you for your inquiry! We will contact you within 24 hours.');
+            form.reset();
+            
+            // In a real application, you would send this data to a server
+            console.log('Form submitted:', Object.fromEntries(formData));
+        }
+
+        // Mobile menu toggle
+        const menuToggle = document.querySelector('.menu-toggle');
+        const navLinks = document.querySelector('.nav-links');
+
+        menuToggle.addEventListener('click', () => {
+            navLinks.style.display = navLinks.style.display === 'flex' ? 'none' : 'flex';
+        });
+
+        // Set home as active on page load
+        document.addEventListener('DOMContentLoaded', () => {
+            showPage('home');
+        });
+    </script>
+</body>
+</html>
